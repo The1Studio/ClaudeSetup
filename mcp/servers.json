@@ -1,0 +1,92 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "/home/user/projects"
+      ],
+      "description": "File system access for project directories"
+    },
+    "git": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-git"
+      ],
+      "description": "Git operations and repository management"
+    },
+    "postgresql": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://localhost/mydb"
+      ],
+      "env": {
+        "POSTGRES_CONNECTION": "postgresql://user:password@localhost/dbname"
+      },
+      "description": "PostgreSQL database access"
+    },
+    "web-search": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_SEARCH_API_KEY": "${BRAVE_SEARCH_API_KEY}"
+      },
+      "description": "Web search capabilities"
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub API access for issues, PRs, and repositories"
+    },
+    "slack": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-slack"
+      ],
+      "env": {
+        "SLACK_TOKEN": "${SLACK_TOKEN}"
+      },
+      "description": "Slack integration for team communication"
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-memory"
+      ],
+      "description": "Persistent memory across Claude sessions"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "description": "Browser automation and web scraping"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "description": "Enhanced reasoning capabilities"
+    },
+    "company-api": {
+      "command": "node",
+      "args": [
+        "/opt/company-mcp/server.js"
+      ],
+      "env": {
+        "API_KEY": "${COMPANY_API_KEY}",
+        "API_ENDPOINT": "${COMPANY_API_ENDPOINT}"
+      },
+      "description": "Internal company API access"
+    }
+  }
+}
