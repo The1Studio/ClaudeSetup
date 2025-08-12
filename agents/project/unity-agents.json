@@ -1,0 +1,13 @@
+{
+  "type": "project",
+  "project_type": "unity",
+  "repository": "https://github.com/The1Studio/the1-unity-claude-agents",
+  "description": "Unity development agents - 40+ specialized agents",
+  "instructions": "Read agent definitions and documentation directly from the repository",
+  "required_mcps": [
+    "unity-mcp",
+    "unity-assets"
+  ],
+  "local_clone_path": "~/.claude/agents/unity",
+  "usage": "When working on Unity projects, fetch and follow the agent definitions from the repository above"
+}

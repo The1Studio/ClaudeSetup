@@ -1,0 +1,12 @@
+{
+  "type": "project",
+  "project_type": "cocos",
+  "repository": "https://github.com/The1Studio/the1-cocos-claude-agent",
+  "description": "Cocos Creator development agents - 29 specialized agents",
+  "instructions": "Read agent definitions and documentation directly from the repository",
+  "required_mcps": [
+    "cocos-assets"
+  ],
+  "local_clone_path": "~/.claude/agents/cocos",
+  "usage": "When working on Cocos projects, fetch and follow the agent definitions from the repository above"
+}

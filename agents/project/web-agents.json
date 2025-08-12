@@ -1,0 +1,12 @@
+{
+  "type": "project",
+  "project_type": "web",
+  "repository": "https://github.com/vijaythecoder/awesome-claude-agents",
+  "description": "Web framework development agents - 24+ specialized agents",
+  "instructions": "Read agent definitions and documentation directly from the repository",
+  "required_mcps": [
+    "web-src"
+  ],
+  "local_clone_path": "~/.claude/agents/web",
+  "usage": "When working on web projects, fetch and follow the agent definitions from the repository above"
+}
