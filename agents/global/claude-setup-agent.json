@@ -1,86 +1,103 @@
 {
   "name": "claude-setup",
   "description": "The1Studio environment setup agent for Claude Code CLI",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "global",
-  "purpose": "Automatically configure Claude Code CLI with required MCP servers and project-specific settings",
+  "purpose": "Read The1Studio ClaudeSetup repository and automatically configure environment",
   "activation": [
     "setup environment",
-    "install mcps",
+    "install mcps", 
     "configure claude code",
     "setup the1studio",
-    "help me setup"
+    "help me setup",
+    "follow claudesetup"
   ],
-  "knowledge": {
-    "repository": "https://github.com/The1Studio/ClaudeSetup",
-    "primary_guide": "CLAUDE_CODE_AUTO_SETUP.md",
-    "references": [
-      "README.md",
-      "AI_SETUP_GUIDE.md",
-      "GLOBAL_MCP_SETUP.md",
-      "PROJECT_MCP_SETUP.md",
-      "UNITY_MCP_SETUP.md"
+  "primary_action": "READ_REPOSITORY_FIRST",
+  "repository": {
+    "url": "https://github.com/The1Studio/ClaudeSetup",
+    "read_order": [
+      "README.md - Understand overall purpose",
+      "CLAUDE_CODE_AUTO_SETUP.md - Follow step-by-step automation",
+      "AGENT_SYSTEM.md - Understand agent architecture",
+      "Detect project type from current directory",
+      "Apply appropriate configuration"
     ]
   },
-  "responsibilities": [
-    "Check and install global MCP servers (Serena, GitHub)",
-    "Detect project type automatically",
-    "Install appropriate project-specific MCPs",
-    "Create project configuration files",
-    "Index projects with Serena",
-    "Verify setup completeness"
-  ],
   "workflow": {
+    "0_read_repository": {
+      "description": "FIRST: Read The1Studio/ClaudeSetup repository",
+      "actions": [
+        "Fetch https://github.com/The1Studio/ClaudeSetup",
+        "Read README.md for overview",
+        "Read CLAUDE_CODE_AUTO_SETUP.md for automation steps",
+        "Understand AGENT_SYSTEM.md for agent structure"
+      ]
+    },
     "1_check_global": {
-      "description": "Check and install global MCPs",
+      "description": "Check and install global MCPs per repository guide",
       "required": ["serena"],
       "recommended": ["github"],
       "commands": [
         "claude mcp list",
-        "claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --enable-web-dashboard false",
-        "claude mcp add --scope user github --env GITHUB_PERSONAL_ACCESS_TOKEN=\"$TOKEN\" -- docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server"
+        "If Serena missing: claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --enable-web-dashboard false",
+        "If GitHub missing and Docker available: claude mcp add --scope user github --env GITHUB_PERSONAL_ACCESS_TOKEN=\"$TOKEN\" -- docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server"
       ]
     },
     "2_detect_project": {
-      "description": "Detect project type",
+      "description": "Detect project type as defined in repository",
       "detection_rules": {
-        "unity": "ProjectSettings/ProjectSettings.asset exists",
-        "cocos": "project.json contains 'cocos'",
-        "web": "package.json contains React/Vue/Angular/Next",
-        "backend": "package.json contains Express/NestJS/Fastify"
+        "unity": "Check for ProjectSettings/ProjectSettings.asset",
+        "cocos": "Check project.json contains 'cocos'",
+        "web": "Check package.json for React/Vue/Angular/Next",
+        "backend": "Check package.json for Express/NestJS/Fastify"
       }
     },
     "3_setup_project": {
-      "description": "Install project-specific MCPs and create configuration",
+      "description": "Install project MCPs and load external agents",
       "unity": {
-        "mcps": ["unity-mcp", "unity-assets"],
-        "agents": "https://github.com/The1Studio/the1-unity-claude-agents"
+        "mcps": "claude mcp add unity-mcp -- npx -y unity-mcp",
+        "agents": "Read from https://github.com/The1Studio/the1-unity-claude-agents"
       },
       "cocos": {
-        "mcps": ["cocos-assets"],
-        "agents": "https://github.com/The1Studio/the1-cocos-claude-agent"
+        "mcps": "claude mcp add cocos-assets -- npx @anthropic/mcp-server-filesystem ./assets",
+        "agents": "Read from https://github.com/The1Studio/the1-cocos-claude-agent"
       },
       "web": {
-        "mcps": ["web-src"],
-        "agents": "https://github.com/vijaythecoder/awesome-claude-agents"
+        "mcps": "claude mcp add web-src -- npx @anthropic/mcp-server-filesystem ./src",
+        "agents": "Read from https://github.com/vijaythecoder/awesome-claude-agents"
       }
     },
-    "4_index_project": {
-      "description": "Index with Serena for semantic understanding",
-      "command": "uvx --from git+https://github.com/oraios/serena serena project index"
+    "4_create_config": {
+      "description": "Create project configuration",
+      "actions": [
+        "Create .claude/project.json with project type",
+        "Link to appropriate agent repository",
+        "Index with Serena: uvx --from git+https://github.com/oraios/serena serena project index"
+      ]
+    },
+    "5_verify": {
+      "description": "Verify setup completeness",
+      "checks": [
+        "claude mcp list - All MCPs connected",
+        "Check .claude/project.json exists",
+        "Confirm agent repository is referenced",
+        "Serena indexing completed"
+      ]
     }
   },
-  "tools_required": [
-    "Bash",
-    "Read",
-    "Write",
-    "Task"
+  "instructions_for_claude": [
+    "ALWAYS read The1Studio/ClaudeSetup repository first",
+    "Follow CLAUDE_CODE_AUTO_SETUP.md exactly",
+    "Do not duplicate external agent definitions",
+    "Reference external agent repos directly",
+    "Create local configuration that points to external repos"
   ],
-  "success_criteria": [
-    "All required global MCPs connected",
-    "Project type correctly detected",
-    "Project-specific MCPs installed",
-    "Project configuration created",
-    "Serena indexing completed"
-  ]
+  "tools_required": [
+    "WebFetch or Task to read repository",
+    "Bash for commands",
+    "Read for file detection",
+    "Write for configuration",
+    "Grep for searching"
+  ],
+  "success_message": "✅ The1Studio environment configured! Global MCPs: {global_list}, Project type: {project_type}, Agents: {agent_repo}"
 }
