@@ -14,27 +14,15 @@ claude mcp add unity-mcp -- npx -y unity-mcp
 ```
 
 #### Option 2: CoplayDev Unity MCP (Advanced - Full Unity Bridge)
-For deeper Unity Editor integration, use the CoplayDev Unity MCP with Python bridge:
+For deeper Unity Editor integration with bidirectional communication.
 
-**macOS/Linux:**
-```bash
-# Install Python dependencies
-pip install uv
+**See detailed setup guide:** [UNITY_MCP_SETUP.md](UNITY_MCP_SETUP.md)
 
-# Add Unity MCP with full path to the Unity MCP installation
-claude mcp add UnityMCP -- uv --directory /path/to/UnityMCP/UnityMcpServer/src run server.py
-```
-
-**Windows:**
-```bash
-# Add Unity MCP with Windows paths
-claude mcp add UnityMCP -- "C:/Users/USERNAME/AppData/Roaming/Python/Python313/Scripts/uv.exe" --directory "C:/path/to/UnityMCP/UnityMcpServer/src" run server.py
-```
-
-**Prerequisites for CoplayDev Unity MCP:**
-- Python 3.12+
-- Unity 2020.3 LTS or newer
-- Unity MCP Bridge package installed in Unity
+This option provides:
+- Full Unity Editor integration
+- GameObject and Component manipulation
+- Unity API access from Claude Code
+- Roslyn C# script analysis
 - Repository: https://github.com/CoplayDev/unity-mcp
 
 ### Filesystem Access
