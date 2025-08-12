@@ -1,0 +1,15 @@
+{
+  "type": "unity",
+  "version": "2023.3",
+  "agents": ["https://github.com/The1Studio/the1-unity-claude-agents"],
+  "mcp": {
+    "unity-assets": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-server-filesystem", "./Assets"]
+    },
+    "unity-packages": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-server-filesystem", "./Packages"]
+    }
+  }
+}

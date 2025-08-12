@@ -1,0 +1,10 @@
+{
+  "type": "cocos",
+  "agents": ["https://github.com/The1Studio/the1-cocos-claude-agent"],
+  "mcp": {
+    "cocos-assets": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-server-filesystem", "./assets"]
+    }
+  }
+}

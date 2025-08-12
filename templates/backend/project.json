@@ -1,0 +1,11 @@
+{
+  "type": "backend",
+  "agents": ["https://github.com/vijaythecoder/awesome-claude-agents"],
+  "mcp": {
+    "database": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-server-postgres"],
+      "env": {"DATABASE_URL": "${DATABASE_URL}"}
+    }
+  }
+}

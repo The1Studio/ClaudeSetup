@@ -1,0 +1,16 @@
+{
+  "type": "web",
+  "framework": "react",
+  "agents": ["https://github.com/vijaythecoder/awesome-claude-agents"],
+  "mcp": {
+    "src": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-server-filesystem", "./src"]
+    },
+    "vercel": {
+      "command": "npx",
+      "args": ["@vercel/mcp-server"],
+      "env": {"VERCEL_TOKEN": "${VERCEL_TOKEN}"}
+    }
+  }
+}

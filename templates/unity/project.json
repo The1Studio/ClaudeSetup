@@ -1,0 +1,16 @@
+{
+  "type": "unity",
+  "agents": ["https://github.com/The1Studio/the1-unity-claude-agents"],
+  "mcp": {
+    "unity-mcp": {
+      "command": "npx",
+      "args": ["-y", "unity-mcp"],
+      "description": "Unity Editor integration for managing assets, scenes, and scripts"
+    },
+    "unity-assets": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-server-filesystem", "./Assets"],
+      "description": "Direct filesystem access to Unity Assets folder"
+    }
+  }
+}

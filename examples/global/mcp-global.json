@@ -1,0 +1,21 @@
+{
+  "serena": {
+    "command": "uvx",
+    "args": ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "ide-assistant", "--enable-web-dashboard", "false"],
+    "description": "Semantic code analysis and editing - REQUIRED for The1Studio"
+  },
+  "github": {
+    "command": "npx",
+    "args": ["@anthropic/mcp-server-github"],
+    "env": {"GITHUB_TOKEN": "${GITHUB_TOKEN}"}
+  },
+  "workspace": {
+    "command": "npx",
+    "args": ["@anthropic/mcp-server-filesystem", "${HOME}/projects"]
+  },
+  "clickup": {
+    "command": "npx",
+    "args": ["@custom/mcp-server-clickup"],
+    "env": {"CLICKUP_API_KEY": "${CLICKUP_API_KEY}"}
+  }
+}

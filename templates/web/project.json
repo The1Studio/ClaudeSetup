@@ -1,0 +1,10 @@
+{
+  "type": "web",
+  "agents": ["https://github.com/vijaythecoder/awesome-claude-agents"],
+  "mcp": {
+    "src": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-server-filesystem", "./src"]
+    }
+  }
+}
