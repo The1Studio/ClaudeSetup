@@ -41,6 +41,7 @@ These agents are maintained in external repositories. Claude Code should read th
 
 If agents need to be cloned locally, use this structure:
 
+### Linux/macOS Structure:
 ```
 ~/.claude/
 ├── agents/                    # Agent repositories
@@ -51,7 +52,20 @@ If agents need to be cloned locally, use this structure:
 └── mcp-global.json           # Global MCP configuration
 ```
 
-**Clone commands:**
+### Windows Structure:
+```
+C:\Users\[username]\.claude\
+├── agents\                    # Agent repositories
+│   ├── unity\                # Clone of the1-unity-claude-agents
+│   ├── cocos\                # Clone of the1-cocos-claude-agent
+│   └── web\                  # Clone of awesome-claude-agents
+├── CLAUDE.md                  # Global instructions
+└── mcp-global.json           # Global MCP configuration
+```
+
+### Clone Commands
+
+**Linux/macOS:**
 ```bash
 # Create agents directory
 mkdir -p ~/.claude/agents
@@ -64,6 +78,36 @@ git clone https://github.com/The1Studio/the1-cocos-claude-agent.git ~/.claude/ag
 
 # Clone Web agents
 git clone https://github.com/vijaythecoder/awesome-claude-agents.git ~/.claude/agents/web
+```
+
+**Windows (Command Prompt):**
+```cmd
+:: Create agents directory
+mkdir "%USERPROFILE%\.claude\agents"
+
+:: Clone Unity agents
+git clone https://github.com/The1Studio/the1-unity-claude-agents.git "%USERPROFILE%\.claude\agents\unity"
+
+:: Clone Cocos agents
+git clone https://github.com/The1Studio/the1-cocos-claude-agent.git "%USERPROFILE%\.claude\agents\cocos"
+
+:: Clone Web agents
+git clone https://github.com/vijaythecoder/awesome-claude-agents.git "%USERPROFILE%\.claude\agents\web"
+```
+
+**Windows (PowerShell):**
+```powershell
+# Create agents directory
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\agents"
+
+# Clone Unity agents
+git clone https://github.com/The1Studio/the1-unity-claude-agents.git "$env:USERPROFILE\.claude\agents\unity"
+
+# Clone Cocos agents
+git clone https://github.com/The1Studio/the1-cocos-claude-agent.git "$env:USERPROFILE\.claude\agents\cocos"
+
+# Clone Web agents
+git clone https://github.com/vijaythecoder/awesome-claude-agents.git "$env:USERPROFILE\.claude\agents\web"
 ```
 
 ## How Claude Code Should Use This
