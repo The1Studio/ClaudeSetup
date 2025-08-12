@@ -1,25 +1,44 @@
-# Claude Code Setup Repository
+# The1Studio Claude Code Setup Guide
 
-A simple, AI-readable guide for setting up Claude Code CLI with a two-level configuration system.
+Standardized Claude Code CLI configuration for The1Studio team members, providing company-wide MCP servers and project-specific agent configurations.
 
-## 📋 What This Is
+## 🎯 Purpose
 
-This repository provides templates and examples for configuring Claude Code CLI on developer machines using a two-level approach:
-- **Global**: Tools and settings for all projects
-- **Project**: Specific configurations based on project type (Unity, Cocos, Web, Backend)
+This repository helps The1Studio developers set up Claude Code CLI on their personal devices with:
+- **Required global MCP servers** (Serena for semantic analysis)
+- **Recommended global tools** (GitHub integration)
+- **Project-specific configurations** based on project type (Unity, Cocos, Web, Backend)
+- **AI-readable documentation** allowing Claude Code to self-configure environments
 
-## 🚀 Quick Start
+## 🚀 Quick Start for The1Studio Developers
 
-1. **Read the AI Setup Guide**: `AI_SETUP_GUIDE.md`
-2. **Copy templates**: Use files from `templates/` for your project type
-3. **See examples**: Check `examples/` for real configurations
+### Required Global Setup
+```bash
+# 1. Install Serena MCP (MANDATORY)
+claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --enable-web-dashboard false
+
+# 2. Install GitHub MCP (Recommended, requires Docker)
+claude mcp add --scope user github --env GITHUB_PERSONAL_ACCESS_TOKEN="your-token" -- docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server
+
+# 3. Verify setup
+claude mcp list
+```
+
+### Project-Specific Setup
+For Unity projects, add Unity MCP:
+```bash
+cd /path/to/unity/project
+claude mcp add unity-mcp -- npx -y unity-mcp
+```
 
 ## 📁 Repository Structure
 
 ```
-├── AI_SETUP_GUIDE.md        # Main setup instructions (AI-readable)
+├── AI_SETUP_GUIDE.md        # Main AI-readable setup instructions
+├── GLOBAL_MCP_SETUP.md      # Global MCP server configuration guide
+├── PROJECT_MCP_SETUP.md     # Project-specific MCP configuration
 ├── templates/                # Project type templates
-│   ├── unity/               # Unity project config
+│   ├── unity/               # Unity project config + CLAUDE.md
 │   ├── cocos/               # Cocos project config
 │   ├── web/                 # Web project config
 │   └── backend/             # Backend project config
@@ -27,7 +46,7 @@ This repository provides templates and examples for configuring Claude Code CLI 
 │   ├── global/              # Global setup examples
 │   └── projects/            # Project setup examples
 └── references/              # External agent repositories
-    └── AGENTS.md            # List of agent repositories
+    └── AGENTS.md            # List of The1Studio agent repositories
 ```
 
 ## 🔧 How It Works
@@ -49,12 +68,22 @@ When you run Claude Code in a project, it:
 2. Detects project type
 3. Applies appropriate agents and tools
 
-## 🤖 Agent Repositories
+## 🤖 The1Studio Agent Repositories
 
 - **Unity**: [the1-unity-claude-agents](https://github.com/The1Studio/the1-unity-claude-agents) (40+ agents)
 - **Cocos**: [the1-cocos-claude-agent](https://github.com/The1Studio/the1-cocos-claude-agent) (29 agents)
 - **Design**: [the1-design-claude-agents](https://github.com/The1Studio/the1-design-claude-agents) (15 agents)
 - **Web**: [awesome-claude-agents](https://github.com/vijaythecoder/awesome-claude-agents) (24 agents)
+
+## 🔑 Required MCP Servers
+
+### Global (All Projects)
+- **Serena**: Semantic code analysis and navigation (MANDATORY)
+- **GitHub**: Repository management with Docker (Recommended)
+
+### Project-Specific
+- **Unity MCP**: Unity Editor integration for Unity projects
+- **Filesystem MCP**: Direct access to project folders
 
 ## 💡 For Claude Code
 
