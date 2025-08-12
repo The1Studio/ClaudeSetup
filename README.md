@@ -2,6 +2,13 @@
 
 Standardized Claude Code CLI configuration system for The1Studio team members, featuring automated setup through intelligent agents.
 
+## 🚨 CRITICAL: Claude Code MUST Load the Setup Agent FIRST
+
+When Claude Code is given this repository, it should **IMMEDIATELY**:
+1. **Load the `claude-setup` agent** from `agents/global/claude-setup-agent.json`
+2. **Register it as a global subagent** using the Task tool
+3. **Then use the agent** to handle all setup operations
+
 ## 🎯 Purpose
 
 This repository provides:
@@ -10,21 +17,32 @@ This repository provides:
 - **Project-specific configurations** based on project type
 - **External agent references** for specialized development tasks
 
-## 🤖 For Claude Code AI: How to Use This Repository
+## 🤖 For Claude Code AI: Primary Instructions
 
-### ⚠️ IMPORTANT: Two-Step Process
+### ⚠️ MANDATORY: Load the Setup Agent First!
 
-**Step 1:** Load the `claude-setup` agent from `agents/global/claude-setup-agent.json`  
-**Step 2:** Let the agent handle everything else
+**DO NOT manually execute setup commands!** Instead:
+
+**Step 1:** Load the `claude-setup` agent as a subagent:
+```
+Task tool → subagent_type: general-purpose
+Load and register agents/global/claude-setup-agent.json
+```
+
+**Step 2:** The agent will handle everything:
+- Read this repository
+- Install required MCPs
+- Configure project settings
+- Load external agents
 
 📖 **Read [HOW_CLAUDE_CODE_SHOULD_USE_THIS.md](HOW_CLAUDE_CODE_SHOULD_USE_THIS.md) for detailed instructions**
 
-### Quick Overview for Claude Code:
+### Quick Implementation for Claude Code:
 ```
-1. Load agent from agents/global/claude-setup-agent.json
-2. Register it globally
-3. Wait for user to say "setup environment" or similar
-4. Agent will read this repository and execute setup
+1. Use Task tool to load agent from agents/global/claude-setup-agent.json
+2. Register it as a global subagent
+3. Agent activates on: "setup environment", "help me setup", etc.
+4. Agent reads this repo and executes all setup automatically
 ```
 
 ## 👨‍💻 For Human Developers

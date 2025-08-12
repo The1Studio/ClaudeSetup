@@ -1,36 +1,41 @@
 {
   "name": "claude-setup",
   "description": "The1Studio environment setup agent for Claude Code CLI",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "type": "global",
-  "purpose": "Read The1Studio ClaudeSetup repository and automatically configure environment",
+  "purpose": "Fetch and read The1Studio ClaudeSetup repository to automatically configure any project environment",
   "activation": [
     "setup environment",
     "install mcps", 
     "configure claude code",
     "setup the1studio",
     "help me setup",
-    "follow claudesetup"
+    "follow claudesetup",
+    "setup this project",
+    "configure project"
   ],
-  "primary_action": "READ_REPOSITORY_FIRST",
+  "primary_action": "FETCH_AND_READ_REPOSITORY",
   "repository": {
-    "url": "https://github.com/The1Studio/ClaudeSetup",
+    "source": "https://github.com/The1Studio/ClaudeSetup",
+    "description": "Always fetch this repository first to get latest setup instructions",
+    "fetch_command": "git clone https://github.com/The1Studio/ClaudeSetup /tmp/claudesetup || (cd /tmp/claudesetup && git pull)",
     "read_order": [
-      "README.md - Understand overall purpose",
-      "CLAUDE_CODE_AUTO_SETUP.md - Follow step-by-step automation",
-      "AGENT_SYSTEM.md - Understand agent architecture",
-      "Detect project type from current directory",
-      "Apply appropriate configuration"
+      "/tmp/claudesetup/README.md - Understand overall purpose",
+      "/tmp/claudesetup/CLAUDE_CODE_AUTO_SETUP.md - Follow step-by-step automation",
+      "/tmp/claudesetup/AGENT_SYSTEM.md - Understand agent architecture",
+      "Detect project type from current working directory",
+      "Apply appropriate configuration from /tmp/claudesetup/templates/"
     ]
   },
   "workflow": {
-    "0_read_repository": {
-      "description": "FIRST: Read The1Studio/ClaudeSetup repository",
+    "0_fetch_repository": {
+      "description": "FIRST: Fetch The1Studio/ClaudeSetup repository from GitHub",
       "actions": [
-        "Fetch https://github.com/The1Studio/ClaudeSetup",
-        "Read README.md for overview",
-        "Read CLAUDE_CODE_AUTO_SETUP.md for automation steps",
-        "Understand AGENT_SYSTEM.md for agent structure"
+        "Clone or update https://github.com/The1Studio/ClaudeSetup to /tmp/claudesetup",
+        "Read /tmp/claudesetup/README.md for overview",
+        "Read /tmp/claudesetup/CLAUDE_CODE_AUTO_SETUP.md for automation steps",
+        "Understand /tmp/claudesetup/AGENT_SYSTEM.md for agent structure",
+        "Use templates from /tmp/claudesetup/templates/ for project configuration"
       ]
     },
     "1_check_global": {
@@ -86,11 +91,13 @@
     }
   },
   "instructions_for_claude": [
-    "ALWAYS read The1Studio/ClaudeSetup repository first",
-    "Follow CLAUDE_CODE_AUTO_SETUP.md exactly",
+    "ALWAYS fetch https://github.com/The1Studio/ClaudeSetup repository first",
+    "Clone to /tmp/claudesetup for latest instructions",
+    "Follow /tmp/claudesetup/CLAUDE_CODE_AUTO_SETUP.md exactly",
     "Do not duplicate external agent definitions",
     "Reference external agent repos directly",
-    "Create local configuration that points to external repos"
+    "Create local configuration that points to external repos",
+    "This agent can be used in ANY project to set up The1Studio standards"
   ],
   "tools_required": [
     "WebFetch or Task to read repository",
