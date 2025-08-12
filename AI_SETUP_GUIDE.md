@@ -1,5 +1,8 @@
 # Claude Code Setup Guide (AI-Readable)
 
+## 🤖 For Claude Code Agents
+**Use CLAUDE_CODE_AUTO_SETUP.md for step-by-step automated setup instructions**
+
 ## Company Requirements
 All The1Studio developers MUST have these global MCPs and agents configured.
 
